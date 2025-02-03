@@ -20,6 +20,7 @@ library.add(faTable);
 library.add(faGrip);
 
 /* sets the base url for server API communication with axios */
+console.log("API Base URL:", import.meta.env.VITE_REMOTE_API);
 axios.defaults.baseURL = import.meta.env.VITE_REMOTE_API;
 
 /*
