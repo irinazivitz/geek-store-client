@@ -43,7 +43,8 @@ export default {
     return {
       isLoading: false,
       cardView: true,
-      productList: []
+      searchTerm: "",
+      productList: [],
     };
   },
 
@@ -55,9 +56,16 @@ export default {
 
   methods: {
     getProducts(){
+       console.log("🟡 Calling productService.getProducts()...");
       productService.getProducts()
     .then(response => {
-      this.productList = response.data;
+      console.log("✅ Raw API Response:", response);
+      
+      if (response && response.data) {
+      this.productList = [...response.data]; 
+      console.log("✅ Updated productList:", this.productList);
+      }
+      
       this.isLoading = false;
       });
     },
@@ -84,6 +92,8 @@ export default {
   
   created() {
    this.getProducts();
+       console.log("✅ productList received in ProductsView:", this.productList);
+
   }
 }
 

@@ -6,18 +6,10 @@ import ProductsView from '../views/ProductsView.vue'
 import LoginView from '../views/LoginView.vue'
 import LogoutView from '../views/LogoutView.vue'
 import RegisterView from '../views/RegisterView.vue'
-import ProductsDetailsView from '../views/ProductDetailsView.vue'
+import ProductDetailsView from '../views/ProductDetailsView.vue'
 import ShoppingCartView from '../views/ShoppingCartView.vue'
 
 
-/**
- * The Vue Router is used to "direct" the browser to render a specific view component
- * inside of App.vue depending on the URL.
- *
- * It also is used to detect whether or not a route requires the user to have first authenticated.
- * If the user has not yet authenticated (and needs to) they are redirected to /login
- * If they have (or don't need to) they're allowed to go about their way.
- */
 const routes = [
     {
       path: '/',
@@ -34,9 +26,10 @@ const routes = [
     },
 
     {
-      path: '/product/:productId',
+      path: '/products/:productId',
       name: 'productDetails',
-      component: ProductsDetailsView,
+      component: ProductDetailsView,
+      props: true,
       meta: {
         requiresAuth: false
       }

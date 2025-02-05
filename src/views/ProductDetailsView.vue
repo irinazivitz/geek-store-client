@@ -27,8 +27,14 @@ export default {
   },
 
 created() {
+ console.log("🚀 ProductDetail.vue is mounted!");
+ 
     this.isLoading = true;
-    productService.getProductById(this.$route.params.productId)
+    const productId = this.$route.params.productId;
+   
+    
+    
+    productService.getProductById(productId)
       .then(response => {
         this.productData = response.data;
         this.isLoading = false;

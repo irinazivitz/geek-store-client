@@ -1,13 +1,15 @@
 <template>
     <div class="container" >
         <div class="row row-cols-1 row-cols-md-3 g-4">
+
             <div class="col"
                 v-for="product in productList"
                 v-bind:key="product.id">
                 <div class="card h-100 shadow-sm border-dark">
                     <img src="../img/product_350x250.jpg" class="card-img-top img-fluid rounded" 
-                        alt="Product Image" v-on:click="goToProductDetail(product.id)" />
-                    <div class="card-body text-center" v-on:click="goToProductDetail(product.id)">
+                        alt="Product Image" v-on:click="goToProductDetail(product)" />
+                        <p>Product ID: {{ product.id }}</p>
+                    <div class="card-body text-center" v-on:click="goToProductDetail(product)">
                         <h5 class="card-title text-dark">{{ product.name }}</h5>
                         <p class="card-text">${{ product.price }}</p>
                     </div>
@@ -31,21 +33,29 @@ import cartService from "../services/CartService";
 
 export default {
     props: {
-        productList: [],
+        productList:{
+            type: Array,
+            required: true,
+        },
     },
     data () {
         return {
             alertMessage: null,
         };
     },
+     mounted() {
+    console.log("✅ Received productList in ProductCard.vue:", this.productList);
+  },
     computed: {
         isLoggedIn() {
             return this.$store.state.token.length > 0;
         },
     },
     methods: {
-        goToProductDetail(productId) {
-            this.$router.push(`/product/${productId}`);
+
+
+        goToProductDetail(product) {
+            this.$router.push(`/products/${product.productId}`);
         },
 
         addToCart(product) {
