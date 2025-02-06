@@ -59,9 +59,11 @@ export default {
         },
 
         addToCart(product) {
+            console.log("🛒 Adding product to cart:", product);
             cartService.addProductToCart(product)
                 .then (response => {
-                    if (response.status === 201) {
+                    if (response.status === 200) {
+                        console.log(`✅ ${product.name} added to cart!`);
                         this.alertMessage = `${product.name} added to cart!`;
                         this.$nextTick(() => {
                             setTimeout(() => {

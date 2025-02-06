@@ -1,6 +1,6 @@
 <template>
     <div class ="container my-5">
-            <div  v-if="cart.cartItem.length > 0">
+            <div  v-if="cartItems && cartItems.length > 0">
                 <h1 class="mb-4 fw-bold">Shopping Cart</h1> 
                 <button class="btn custom-btn mb-3 justify-content-end" v-on:click="clearCart"> 
                     Clear cart
@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(cartItem,index) in cart.cartItem" :key="index">
+                        <tr v-for="(cartItem,index) in cartItems" :key="index">
                             <td> {{cartItem.quantity}} </td>
                             <td> {{cartItem.product_name}} </td>
                             <td> ${{cartItem.product_price}} </td>
@@ -56,10 +56,36 @@ export default {
     components: { FontAwesomeIcon },
     data() {
         return {
-            faTrash
+            faTrash,
+            cartItems: Array,
+            subtotal: 0,
+            tax: 0,
+            total: 0
         };
     },
-
+    created (){
+            
+            console.log("🛒 ShoppingCart.vue - Received cartItems:", this.cart);
+            if (this.cart && this.cart.items) {  // ✅ Check if `cart.items` exists
+        this.cartItems = this.cart.items;  // ✅ Copy from props
+    this.subtotal = this.cart.itemSubtotal;
+    this.tax = this.cart.tax;
+    this.total = this.cart.total;
+            }
+           
+    },
+    watch: {
+    cart: {
+        handler(newCart) {
+            console.log("🔄 Cart updated in ShoppingCart.vue:", newCart);
+            if (newCart && newCart.items) {  // ✅ Only update when cart has items
+                this.updateCart();
+            }
+        },
+        deep: true, // ✅ Watch for nested changes
+        immediate: true // ✅ Run when component is first created
+    }
+},
 
     methods: {
         calculateAmount(quantity,price){
@@ -91,10 +117,9 @@ export default {
                     console.error('error', error);
                 })
         },
-        created (){
-            this.getCart();
-        }
-    }
+        
+    },
+    
 }
 </script>
 

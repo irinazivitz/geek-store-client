@@ -16,7 +16,10 @@ export default {
     
     data() {
     return {
-        cartItems: []
+        cartItems: [],
+        subtotal: 0,
+        tax: 0,
+        total: 0
         };
     },
 
@@ -31,13 +34,19 @@ export default {
 
     methods: {
       getCart(){
+        console.log("🛒 Fetching cart in ShoppingCartView.vue...");
         cartService.getCart()
           .then(response => {
-            this.cartItems = response.data;
-            this.isLoading = false;
+            console.log("✅ ShoppingCartView.vue - Cart API Response:", response);
+            this.cartItems = response.items || [];
+               this.subtotal = response.itemSubtotal || 0;
+                    this.tax = response.tax || 0;
+                    this.total = response.total || 0;
+
           })
           .catch(error => {
             console.error('error', error);
+            this.cartItems = []; // ✅ Prevents undefined issues
           });
       },
       refreshCart() {
