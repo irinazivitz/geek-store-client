@@ -8,7 +8,6 @@
                 <div class="card h-100 shadow-sm border-dark">
                     <img src="../img/product_350x250.jpg" class="card-img-top img-fluid rounded" 
                         alt="Product Image" v-on:click="goToProductDetail(product)" />
-                        <p>Product ID: {{ product.id }}</p>
                     <div class="card-body text-center" v-on:click="goToProductDetail(product)">
                         <h5 class="card-title text-dark">{{ product.name }}</h5>
                         <p class="card-text">${{ product.price }}</p>

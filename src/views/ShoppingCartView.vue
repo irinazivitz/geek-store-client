@@ -1,6 +1,6 @@
 <template>
   <div>
-   <shopping-cart v-bind:cart="cartItems" @cart-updated="refreshCart"/>
+   <shopping-cart v-bind:cart="{ items: cartItems, subtotal, tax, total }" @cart-updated="refreshCart"/>
   </div>
 </template>
 
@@ -34,19 +34,22 @@ export default {
 
     methods: {
       getCart(){
-        console.log("🛒 Fetching cart in ShoppingCartView.vue...");
         cartService.getCart()
           .then(response => {
-            console.log("✅ ShoppingCartView.vue - Cart API Response:", response);
-            this.cartItems = response.items || [];
+            if (response) {
+              this.cartItems = response.items || [];
                this.subtotal = response.itemSubtotal || 0;
                     this.tax = response.tax || 0;
                     this.total = response.total || 0;
+            } else {
+                console.warn("⚠️ No data found in response!");
+            }
+
 
           })
           .catch(error => {
             console.error('error', error);
-            this.cartItems = []; // ✅ Prevents undefined issues
+            this.cartItems = []; 
           });
       },
       refreshCart() {

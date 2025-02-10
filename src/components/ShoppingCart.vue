@@ -18,11 +18,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(cartItem,index) in cartItems" :key="index">
+                        <tr v-for="(cartItem,index) in cart.items" :key="index">
                             <td> {{cartItem.quantity}} </td>
-                            <td> {{cartItem.product_name}} </td>
-                            <td> ${{cartItem.product_price}} </td>
-                            <td> ${{calculateAmount(cartItem.quantity, cartItem.product_price)}}  </td>
+                            <td> {{cartItem.product.name}} </td>
+                            <td> ${{cartItem.product.price}} </td>
+                            <td> ${{calculateAmount(cartItem.quantity, cartItem.product.price)}}  </td>
                             <td>
                                 <button class="btn btn-sm btn-outline-danger" @click="deleteItem(cartItem.cartItemId)">
                                    Delete <font-awesome-icon :icon="faTrash" /> 
@@ -34,7 +34,7 @@
             </div>
             <div class="mt-4 p-3 bg-light rounded shadow-sm text-end">
                 <div class="fs-5" > Subtotal: ${{cart.subtotal}} </div>
-                <div class="fs-5" > Sales Tax: ${{cart.salesTax}} </div>
+                <div class="fs-5" > Sales Tax: ${{cart.tax}} </div>
                 <div class= "fs-4 fw-bold text-primary"> Total: ${{cart.total}} </div>
             </div>    
         </div>
@@ -65,12 +65,26 @@ export default {
     },
     created (){
             
-            console.log("🛒 ShoppingCart.vue - Received cartItems:", this.cart);
-            if (this.cart && this.cart.items) {  // ✅ Check if `cart.items` exists
-        this.cartItems = this.cart.items;  // ✅ Copy from props
-    this.subtotal = this.cart.itemSubtotal;
-    this.tax = this.cart.tax;
-    this.total = this.cart.total;
+            if (!this.cart) {
+                console.warn("⚠️ cart is undefined!");
+                return;
+            }
+                console.log("📦 ShoppingCart.vue - Checking cart structure:", {
+                    items: this.cart.items,
+                    subtotal: this.cart.subtotal,
+                    tax: this.cart.tax,
+                    total: this.cart.total
+            });
+            if (this.cart && this.cart.items) { 
+                    this.cartItems = this.cart.items;  
+                    this.subtotal = this.cart.subtotal;
+                    this.tax = this.cart.tax;
+                    this.total = this.cart.total;
+
+                console.log("✅ Assigned cartItems:", this.cartItems);
+            }
+            else {
+                console.warn("⚠️ cart.items is missing or empty");
             }
            
     },
@@ -78,12 +92,15 @@ export default {
     cart: {
         handler(newCart) {
             console.log("🔄 Cart updated in ShoppingCart.vue:", newCart);
-            if (newCart && newCart.items) {  // ✅ Only update when cart has items
-                this.updateCart();
+            if (newCart && newCart.items) {  
+                this.updateCart(newCart);
+            }
+            else {
+                console.warn("⚠️ Cart is empty or missing items:", newCart);
             }
         },
-        deep: true, // ✅ Watch for nested changes
-        immediate: true // ✅ Run when component is first created
+        deep: true, 
+        immediate: true 
     }
 },
 
@@ -117,8 +134,23 @@ export default {
                     console.error('error', error);
                 })
         },
+
+        updateCart(newCart) {
+            console.log("🔄 Cart updated in ShoppingCart.vue:", newCart);
+
+            if (!newCart || typeof newCart !== "object") {
+            console.warn("⚠️ updateCart() received invalid cart data:", newCart);
+            return;
+            }
+
+            this.cartItems = newCart.items || [];
+            this.subtotal = newCart.subtotal ?? newCart.itemSubtotal ?? 0; 
+            this.tax = newCart.tax ?? 0;
+            this.total = newCart.total ?? 0;
+        },
         
     },
+    
     
 }
 </script>
