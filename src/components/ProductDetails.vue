@@ -1,6 +1,6 @@
 <template>
     <div class="container my-5">
-        <div class="card shadow-lg p-4" v-if="product">
+        <div class="card shadow-lg p-4 product-card" v-if="product">
             <h2 class ="text-center"> {{product.name}} </h2>
             <div class="row align-items-start my-4">
                 <div class="col-md-6">
@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src ="../img/product_350x250.jpg" class="img-fluid rounded shadow-lg" alt="Product Image">
+                    <img src ="../img/product_350x250.jpg" class="img-fluid rounded shadow-lg product-image" alt="Product Image">
                     <button class="btn custom-btn  btn-lg mt-3" v-on:click="addToCart(product)"> 
                         <font-awesome-icon icon="fa-solid fa-cart-plus" title="Add item to cart"/>   Add to cart 
                     </button>
@@ -29,9 +29,17 @@ import cartService from "../services/CartService";
 
 export default {
     props: ['product'],
+    computed: {
+    isLoggedIn() {
+      return this.$store.state.token.length > 0;
+    },
+  },
     
     methods: {
         addToCart(product){
+            if (!this.isLoggedIn){
+                this.$router.push ({ name: 'login'});
+            }
             cartService.addProductToCart(product)
                 .then (response => {
                     if (response.status === 200 ) {
@@ -52,6 +60,18 @@ export default {
 .card {
   border-radius: 15px;
   background-color: #f5ebe0;
+}
+
+.product-card {
+  max-width: 900px;
+  width: 100%;
+  background-color: #f5ebe0;
+  border-radius: 15px;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
 }
 
 .sku {
