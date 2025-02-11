@@ -111,9 +111,13 @@ export default {
     
 
         deleteItem(id){
+            console.log(`🗑 Attempting to delete item with ID: ${id}`);
+    
             cartService.deleteItem(id)
                 .then (response => {
-                    if (response.status === 200 ) {
+                    console.log("🛒 API Response from delete:", response);
+                    if (response.status === 200 ||response.status === 204 ) {
+                        console.log("✅ Item deleted, emitting cart-updated event");
                         this.$emit("cart-updated");
                     }
                 })
@@ -125,7 +129,7 @@ export default {
         clearCart(){
             cartService.clearCart()
                 .then (response => {
-                    if (response.status === 200 ) {
+                    if (response.status === 200 || response.status === 204) {
                         this.$emit("cart-updated");
                         
                     }

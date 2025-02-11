@@ -12,7 +12,7 @@
                         <h5 class="card-title text-dark">{{ product.name }}</h5>
                         <p class="card-text">${{ product.price }}</p>
                     </div>
-                    <div class="card-footer  d-flex justify-content-center" v-if="isLoggedIn">
+                    <div v-if="isLoggedIn" class="card-footer d-flex justify-content-center">
                         <button class="btn btn-outline-dark" @click.stop="addToCart(product)">
                             <font-awesome-icon icon="fa-solid fa-cart-plus" title="Add item to cart" />
                             Add to Cart

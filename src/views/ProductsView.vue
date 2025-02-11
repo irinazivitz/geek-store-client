@@ -2,8 +2,8 @@
   <div class="container mt-4">
     <h4 v-if="!isLoggedIn" class="alert alert-info">
           Welcome! You may browse anonymously as much as you wish, but you must
-          <router-link class="btn btn-link" v-bind:to="{ name: 'login' }">
-            Login</router-link> to add items to your shopping cart.
+          <router-link class="login-link" v-bind:to="{ name: 'login' }">
+            login</router-link> to add items to your shopping cart.
     </h4>
     <div class="row  mt-4">
       <div class="col-md-8">
@@ -104,5 +104,17 @@ export default {
 .alert{
   background-color: #e3d5ca;
   border: none;
+}
+
+.login-link {
+  text-decoration: underline;  
+  color: inherit; 
+  font-weight: inherit;
+  font-size: inherit; 
+  cursor: pointer; 
+}
+
+.login-link:hover {
+  text-decoration: none;
 }
 </style>

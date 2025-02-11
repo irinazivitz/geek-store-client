@@ -6,7 +6,10 @@
       <header class=" py-3">
         <div class="container d-flex align-items-center justify-content-between">
           <!-- logo -->
-          <img src ="./img/attachment_126228423.jpg" class="img-fluid rounded-circle shadow" alt="Logo" />
+          <router-link :to ="{ name: 'home'}">
+             <img src ="./img/attachment_126228423.jpg" class="img-fluid rounded-circle shadow" alt="Logo" />
+          </router-link>
+         
 
         <!-- Navbar -->
           <nav class="navbar navbar-expand-md navbar-dark">
