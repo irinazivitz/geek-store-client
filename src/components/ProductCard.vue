@@ -6,7 +6,7 @@
                 v-for="product in productList"
                 v-bind:key="product.id">
                 <div class="card h-100 shadow-sm border-dark">
-                    <img src="../img/product_350x250.jpg" class="card-img-top img-fluid rounded" 
+                    <img src="../img/placeholder_product.jpeg" class="card-img-top img-fluid rounded" 
                         alt="Product Image" v-on:click="goToProductDetail(product)" />
                     <div class="card-body text-center" v-on:click="goToProductDetail(product)">
                         <h5 class="card-title text-dark">{{ product.name }}</h5>

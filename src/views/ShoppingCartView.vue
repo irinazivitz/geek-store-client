@@ -1,6 +1,10 @@
 <template>
   <div>
-   <shopping-cart v-bind:cart="{ items: cartItems, subtotal, tax, total }" @cart-updated="refreshCart"/>
+    <loading-spinner :spin="isLoading" />
+    <shopping-cart 
+      v-if="!isLoading"
+      v-bind:cart="{ items: cartItems, subtotal, tax, total }"
+      @cart-updated="refreshCart"/>
   </div>
 </template>
 
@@ -8,10 +12,12 @@
 <script>
 import cartService from "../services/CartService";
 import ShoppingCart from "../components/ShoppingCart.vue";
+import LoadingSpinner from "../components/LoadingSpinner.vue";
 
 export default {
     components: {
         ShoppingCart,
+        LoadingSpinner
     },
     
     data() {
@@ -19,7 +25,8 @@ export default {
         cartItems: [],
         subtotal: 0,
         tax: 0,
-        total: 0
+        total: 0,
+        isLoading: true,
         };
     },
 
@@ -34,6 +41,8 @@ export default {
 
     methods: {
       getCart(){
+        this.isLoading = true;
+
         cartService.getCart()
           .then(response => {
             if (response) {
@@ -44,14 +53,17 @@ export default {
             } else {
                 console.warn("⚠️ No data found in response!");
             }
-
-
           })
           .catch(error => {
             console.error('error', error);
             this.cartItems = []; 
+          })
+          .finally(() => {
+            this.isLoading = false; 
           });
       },
+    
+
       refreshCart() {
         this.getCart();
       }

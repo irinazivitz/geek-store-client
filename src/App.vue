@@ -7,7 +7,7 @@
         <div class="container d-flex align-items-center justify-content-between">
           <!-- logo -->
           <router-link :to ="{ name: 'home'}">
-             <img src ="./img/attachment_126228423.jpg" class="img-fluid rounded-circle shadow" alt="Logo" />
+             <img src ="./img/logo_new.jpg" class="img-fluid rounded-circle shadow" alt="Logo" />
           </router-link>
          
 
@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <router-link class="nav-link text-black" v-bind:to="{ name: 'home' }">Home</router-link>
+                  <router-link class="nav-link text-black" v-bind:to="{ name: 'home' }" >Home</router-link>
                 </li>
                 <li class="nav-item">
                   <router-link class="nav-link text-black" v-bind:to="{ name: 'cart' }">Cart</router-link>
