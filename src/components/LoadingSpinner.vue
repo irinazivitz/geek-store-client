@@ -23,9 +23,9 @@ export default {
   transition-property: opacity;
   transition-duration: 400ms;
   position: fixed;  
-  top: 15px;      
-  left: 15px;
-  font-size: 1.5rem; 
+  top: 50%;    
+  left: 50%;
+  font-size: 2rem; 
   color: #6b5b4e;    
 }
 </style>

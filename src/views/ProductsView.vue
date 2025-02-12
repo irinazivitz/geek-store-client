@@ -16,7 +16,7 @@
           class="form-control"
           id="searchBar"
           type="text"
-          placeholder="Search...                  🔍"
+          placeholder="Search..."
           v-model="searchTerm"
           @input="getProductByName" />
       </div>
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import LoadingSpinner from "../components/LoadingSpinner.vue";
 import productService from "../services/ProductService";
 import ProductCard from "../components/ProductCard.vue";
 
@@ -41,7 +40,6 @@ export default {
   },
   data() {
     return {
-      isLoading: false,
       cardView: true,
       searchTerm: "",
       productList: [],
@@ -56,14 +54,11 @@ export default {
 
   methods: {
     getProducts(){
-       console.log("🟡 Calling productService.getProducts()...");
       productService.getProducts()
     .then(response => {
-      console.log("✅ Raw API Response:", response);
       
       if (response && response.data) {
       this.productList = [...response.data]; 
-      console.log("✅ Updated productList:", this.productList);
       }
       
       this.isLoading = false;
@@ -92,8 +87,6 @@ export default {
   
   created() {
    this.getProducts();
-       console.log("✅ productList received in ProductsView:", this.productList);
-
   }
 }
 

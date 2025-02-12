@@ -28,19 +28,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <router-link class="nav-link text-black" v-bind:to="{ name: 'home' }" >Home</router-link>
+                  <router-link class="nav-link text-black fs-5 fs-md-4 fs-lg-3" v-bind:to="{ name: 'home' }" >Home</router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link class="nav-link text-black" v-bind:to="{ name: 'cart' }">Cart</router-link>
+                  <router-link class="nav-link text-black fs-5 fs-md-4 fs-lg-3" v-bind:to="{ name: 'cart' }">Cart</router-link>
                 </li>
                 <li class="nav-item">
                   <router-link 
-                    class="nav-link text-black" 
+                    class="nav-link text-black fs-5 fs-md-4 fs-lg-3" 
                     v-bind:to="{ name: 'logout' }" 
                     v-if="$store.state.token"
                   >Logout</router-link>
                   <router-link 
-                    class="nav-link text-black" 
+                    class="nav-link text-black fs-5 fs-md-4 fs-lg-3" 
                     v-bind:to="{ name: 'login' }" 
                     v-else
                   >Login</router-link>

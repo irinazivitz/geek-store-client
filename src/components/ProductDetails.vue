@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src ="../img/product_350x250.jpg" class="img-fluid rounded shadow-lg product-image" alt="Product Image">
+                    <img src ="../img/placeholder_product.jpeg" class="img-fluid rounded shadow-lg product-image" alt="Product Image">
                     <button class="btn custom-btn  btn-lg mt-3" v-on:click="addToCart(product)"> 
                         <font-awesome-icon icon="fa-solid fa-cart-plus" title="Add item to cart"/>   Add to cart 
                     </button>
