@@ -3,7 +3,7 @@
 **Geek Store** is a full-stack e-commerce web application built with **Vue.js** (frontend) and **Java Spring Boot** (backend). It features dynamic product browsing, user authentication, cart management, and order processing.
 
 **Live Demo:** [See Live](https://geekstoreproject.netlify.app)
-**Backend Repository:** [Geek Store Backend](https://github.com/irinazivitz/geek-store-server)
+**Looking for the backend code?** [Geek Store Backend](https://github.com/irinazivitz/geek-store-server)
 
 ---
 
