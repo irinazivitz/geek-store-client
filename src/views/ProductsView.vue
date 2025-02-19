@@ -22,7 +22,7 @@
       </div>
     </div>
     
-      <section id = "product-cards">
+      <section class =" mt-4">
           <product-card v-bind:productList="productList"   />
       </section>
 

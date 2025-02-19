@@ -10,7 +10,7 @@
                 <table class="table table-bordered table-hover shadow-sm">
                     <thead class="custom-table-header">
                         <tr>
-                            <th>Quantity </th> 
+                            <th>Qty </th> 
                             <th>Product</th>
                             <th>Price</th>
                             <th>Amount</th>
