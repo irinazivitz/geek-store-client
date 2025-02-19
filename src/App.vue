@@ -65,6 +65,14 @@
   </body>
 </template>
 
+<script>
+export default {
+  mounted() {
+    this.$store.commit("LOGOUT"); // Force logout on page load
+  }
+};
+</script>
+
 <style scoped>
 
 #app {
@@ -82,7 +90,7 @@ header img {
     height: auto;
 }
 .navbar-toggler-icon {
-  filter: invert(1);  /* keep burger icon black color  */
+  filter: invert(1);  
   width: 30px !important;  
   height: 30px !important; 
 }

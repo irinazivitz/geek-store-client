@@ -25,7 +25,7 @@
                             <td> ${{calculateAmount(cartItem.quantity, cartItem.product.price)}}  </td>
                             <td>
                                 <button class="btn btn-sm btn-outline-danger" @click="deleteItem(cartItem.cartItemId)">
-                                   Delete <font-awesome-icon :icon="faTrash" /> 
+                                    <font-awesome-icon :icon="faTrash" /> 
                                 </button> 
                             </td>
                         </tr>
